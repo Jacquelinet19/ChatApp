@@ -9,18 +9,18 @@ public class TCPClient {
             InetAddress host = InetAddress.getByName("127.0.0.1");
             System.out.println("Server: " + server_port);
 
-            Socket socket = new Socket(host,server_port);
-            System.out.println("Connected to " + socket.getRemoteSocketAddress());
+            Socket client_socket = new Socket(host,server_port);
+            System.out.println("Connected to " + client_socket.getRemoteSocketAddress());
 
-            PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output_text = new PrintWriter(client_socket.getOutputStream(),true);
+            BufferedReader input_text = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
 
-            out.println("Hi from " + socket.getLocalSocketAddress());
-            String response = in.readLine();
+            output_text.println("Hi from " + client_socket.getLocalSocketAddress());
+            String response = input_text.readLine();
             System.out.println("Client received the message: " + response + "from Server");
-            out.close();
-            in.close();
-            socket.close();
+            output_text.close();
+            input_text.close();
+            client_socket.close();
         }
         catch (UnknownHostException e) {
             e.printStackTrace();

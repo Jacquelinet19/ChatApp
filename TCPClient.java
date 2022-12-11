@@ -13,6 +13,7 @@ public class TCPClient {
             Socket client_socket = new Socket(host,server_port);
             System.out.println("Connected to " + client_socket.getRemoteSocketAddress());
 
+
             PrintWriter output_text = new PrintWriter(client_socket.getOutputStream(),true);
             BufferedReader input_text = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
 
@@ -57,6 +58,10 @@ public class TCPClient {
                 });
              
             incoming_text.start();
+
+
+           
+
         }
             
         catch (UnknownHostException e) {

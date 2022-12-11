@@ -20,7 +20,7 @@ public class TCPClient {
                 String response;
                 public void run() {
                     while(true) {
-            
+                        
                         response = scan.nextLine();
                         output_text.println(response);
                         output_text.flush();

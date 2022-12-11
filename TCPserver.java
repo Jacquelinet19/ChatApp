@@ -3,9 +3,19 @@ import java.net.*;
 import java.util.Scanner;
 
 public class TCPserver {
+    
+    private String name;
+    
     public void run() {
+        Scanner scan = new Scanner (System.in);
+        
+
+        
+        System.out.println("Your Name: ");
+        this.name = scan.nextLine();
+
         try {
-            final Scanner scan = new Scanner(System.in);
+            
             int server_port = 12000;
             ServerSocket server_socket = new ServerSocket(server_port);
             server_socket.setSoTimeout(100000);
@@ -14,15 +24,18 @@ public class TCPserver {
 
             Socket client_socket = server_socket.accept();
             System.out.println("Just connected to " + client_socket.getRemoteSocketAddress());
+            
+            
 
             PrintWriter output_text = new PrintWriter(client_socket.getOutputStream(),true);
             BufferedReader input_text = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
                 
             Thread outgoing_text = new Thread(new Runnable() {
                     String response;
+                    
                     public void run() {
                         while(true) {
-
+                           
                             response = scan.nextLine();
                             output_text.println(response);
                             output_text.flush();
@@ -41,6 +54,7 @@ public class TCPserver {
                         response = input_text.readLine();
 
                         while(response != null) {
+                            
                             System.out.println(response);
                             response = input_text.readLine();
 
